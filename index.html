@@ -1,5 +1,360 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Elphick - Modern Professional Resume</title>
+    <style>
+        /* Google Color Palette */
+        :root {
+            --google-blue: #4285F4;
+            --google-red: #DB4437;
+            --google-yellow: #F4B400;
+            --google-green: #0F9D58;
+            --text-dark: #202124; /* Near-black for text */
+            --bg-light: #f8f9fa; /* Very light gray */
+            --border-subtle: #dadce0;
+        }
+
+        /* Modern Reset and Base Styles */
+        body {
+            font-family: 'Roboto', 'Arial', sans-serif; /* Modern, clean font choice */
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            border-radius: 8px;
+        }
+
+        /* Header Styles - Blue Accent */
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 5px solid var(--google-blue);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 3em;
+            color: var(--text-dark);
+            font-weight: 500;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 1.1em;
+            color: #5f6368; /* Google's dark gray */
+            font-weight: 300;
+        }
+
+        .contact a {
+            color: var(--google-blue);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .contact a:hover {
+            color: var(--google-red);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 45px;
+            opacity: 0; /* Initial state for fade-in */
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* CSS for a subtle fade-in effect on sections (non-JavaScript scrolling animation alternative) */
+        section:nth-child(1) { transition-delay: 0.1s; }
+        section:nth-child(2) { transition-delay: 0.2s; }
+        section:nth-child(3) { transition-delay: 0.3s; }
+        section:nth-child(4) { transition-delay: 0.4s; }
+        section:nth-child(5) { transition-delay: 0.5s; }
+        section:nth-child(6) { transition-delay: 0.6s; }
+
+        /* Triggering the transition (in a real-world scenario, this would be done with JavaScript/Intersection Observer on scroll) */
+        /* For static display, we'll apply 'visible' immediately */
+        body:not(.loading) section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        h2 {
+            font-size: 1.6em;
+            color: var(--google-blue); /* Section title in blue */
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--border-subtle);
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Experience Styling */
+        .experience-item {
+            margin-bottom: 28px;
+            padding-left: 15px;
+            border-left: 3px solid var(--google-yellow); /* Yellow line accent */
+        }
+
+        .experience-item h3 {
+            margin: 0 0 2px 0;
+            font-size: 1.3em;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .experience-item h4 {
+            margin: 0 0 8px 0;
+            font-size: 0.9em;
+            color: #70757a;
+            font-weight: normal;
+        }
+
+        .experience-item ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+
+        .experience-item li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 0.95em;
+        }
+
+        .experience-item li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--google-green); /* Green bullet point */
+            border-radius: 50%;
+        }
+
+        /* Expertise Grid - Tag Style */
+        .expertise-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .expertise-grid span {
+            background-color: #e8f0fe; /* Very light blue background */
+            color: var(--google-blue);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+            border: 1px solid #d2e3fc;
+            white-space: nowrap;
+        }
+
+        /* Education/Awards Styling */
+        .education-item h3 {
+             color: var(--text-dark);
+             font-size: 1.2em;
+        }
+
+        .education-item h4 {
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        .awards-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .awards-list > li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .awards-list > li:before {
+            content: '⭐'; /* Modern star emoji */
+            position: absolute;
+            left: 0;
+            color: var(--google-red); /* Red star accent */
+            margin-right: 8px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 25px;
+            }
+            .header h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
 <body>
-<h1>hello world</h1>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Tom Elphick</h1>
+            <p>Advertising Executive </p>
+            <p class="contact"><a href="https://www.linkedin.com/in/tomelphick">www.linkedin.com/in/tomelphick</a> </p>
+        </div>
+
+        <section>
+            <h2>Summary</h2>
+            <p>With 18 years of experience in the online ad serving industry, I bring a wealth of technical knowledge and insights to any role. I have worked with the largest global brands, advertisers, and buyers across both the buy and sell side of the Ads Ecosystem, offering a solutions-driven attitude and deep understanding of the industry. My strong leadership skills and inclusive management style have enabled me to coach and develop teams, implement new strategies, and drive revenue and growth. I have managed cross-functional and geographically dispersed teams in over 8 countries, contributing to businesses that have generated over $3B a year for Google.</p>
+        </section>
+
+        <section>
+            <h2>Areas of Expertise</h2>
+            <div class="expertise-grid">
+                <span>Manager of Tech/Non Tech workforce </span>
+                <span>AdServing knowledge </span>
+                <span>Coaching </span>
+                <span>Strategy Development </span>
+                <span>Managing Remote workers </span>
+                <span>Managing Performance </span>
+                <span>JavaScript HTML5 CSS </span>
+                <span>Adobe </span>
+                <span>Software Google </span>
+                <span>Enterprise GoogleAds </span>
+                <span>Google Analytics </span>
+                <span>Vision/Mission Setting </span>
+                <span>Sales Collaboration </span>
+                <span>Video Editing </span>
+                <span>Problem Solving </span>
+                <span>Project Management </span>
+                <span>Business development </span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+
+            <div class="experience-item">
+                <h3>Head of Global Exchange Platforms - Google</h3>
+                <h4>Jun 2024–Present</h4>
+            </div>
+
+            <div class="experience-item">
+                <h3>Head of EMEA & APAC Exchange Platforms - Google</h3>
+                <h4>Jul 2021–Jun 2024 </h4>
+                <ul>
+                    <li>Leading a team of Global Solution Consultants across AMER, EMEA and APAC supporting Google's Ad exchange products, Authorised Buyers, Open Bidding, SDK Bidding and Agency.</li>
+                    <li>Guided team through introduction of key business planning & collaboration with global stakeholders across Google including PM and ENG.</li>
+                    <li>Devised key global strategies while collaborating and leading a global team of 20 specialists.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Head of Exchange & Inventory EMEA - Google</h3>
+                <h4>Apr 2017–Jul 2021</h4>
+                <ul>
+                    <li>Managed Specialists & Engineers driving Google's AdX business & increasing Google's 3rd party exchange support for DoubleClick Bid Manager.</li>
+                    <li>Implemented global strategies building a team from ideation through to launching support for 3rd party exchange which helped generate +$1B revenue globally.</li>
+                    <li>Heavily focused on improving inventory for DV360 through ConnectedTV & Programmatic Guaranteed.</li>
+                    <li>Clients included Teads, DailyMotion, appnexus, Spotify and FreeWheel.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Head of Creative Specialists EMEA - Google</h3>
+                <h4>Apr 2016–Mar 2017</h4>
+                <ul>
+                    <li>Lead a team of Specialists & Engineers across EMEA setting direction and liaising with global peers and Creative Agencies running branding campaigns across the web.</li>
+                    <li>Coached and guided through org changes as well as ecosystem changes such as deprecation of Flash and adoption of HTML5.</li>
+                    <li>Supported clients such as TribalDDB, Mediamonks, AKQA, FT and IMDB.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Head of Creative Specialists UK & IE - Google</h3>
+                <h4>Jul 2014–Mar 2016</h4>
+                <ul>
+                    <li>Lead a team of Specialists driving Google's engagement with large brand advertisers, technology partners, publishers and creative agencies.</li>
+                    <li>Ensured high adoption and usage of Google's creative products, enabling multiple million dollar campaigns to run.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Rich Media Technical Specialist - DoubleClick</h3>
+                <h4>Aug 2007–Jun 2014</h4>
+                <ul>
+                    <li>Worked with leading creative agencies throughout Europe such as M&C & W&K in addition to Media Agencies like Carat & OMD.</li>
+                    <li>Supported large advertisers ranging from Visa, McDonalds, Coke to the leading web properties including YouTube & Guardian.</li>
+                    <li>Provided technical consultation training and served as a point of escalation for creative and site related issues.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Graphic & Web Designer - Freelance</h3>
+                <h4>Jun 2006–Jul 2007 </h4>
+                <ul>
+                    <li>Provided clients with innovative solutions and feature-rich websites.</li>
+                    <li>Designed solutions containing content management systems, and Search Engine optimisation.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="experience-item education-item">
+                <h3>National Certificate in Graphic Design</h3>
+                <h4>Brighton City College - 2006</h4>
+            </div>
+            <div class="experience-item education-item">
+                <h3>National Certificate in Photography</h3>
+                <h4>Brighton City College - 2004 </h4>
+            </div>
+            <div class="experience-item education-item">
+                <h3>3 A Levels</h3>
+                <h4>Haywards Heath College - 2003</h4>
+            </div>
+            <div class="experience-item education-item">
+                <h3>10 GCSEs grades A* - C</h3>
+                <h4>Oathall College - 2001</h4>
+            </div>
+        </section>
+
+        <section>
+            <h2>Awards & Training</h2>
+            <ul class="awards-list">
+                <li>Google Founder's Award for YouTube Monetization</li>
+                <li>External provided Google Trainings include: Coaching for Business Results, Foundations in Leadership, Managing Energy, and Manager Flagship</li>
+                <li>DEI&B Trainings</li>
+            </ul>
+        </section>
+
+    </div>
+
 </body>
 </html>
