@@ -1,0 +1,136 @@
+/* --- Global & Reset Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #121212; /* Very dark background */
+    color: #E0E0E0; /* Light text for contrast */
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: #d9dadb;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+}
+
+/* --- Gallery Layout --- */
+.gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    /* Responsive Grid Layout */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; /* Space between images */
+}
+
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images cover their grid area */
+    display: block;
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle lift effect */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery img:hover {
+    transform: scale(1.02); /* Slight zoom on hover */
+    opacity: 0.85;
+}
+
+/* --- Full-Screen Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 60px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.95); /* Black w/ transparency */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh; /* Limits height to viewport */
+    object-fit: contain; /* Ensures the full image is visible */
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: 15px auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #CCC;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #BB86FC;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- Animation --- */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+/* --- Mobile Responsiveness --- */
+@media screen and (max-width: 768px) {
+    /* Adjust grid for smaller screens */
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .modal-content {
+        width: 100%; /* Full width on small screens */
+    }
+
+    .close {
+        font-size: 30px;
+        right: 20px;
+    }
+}
